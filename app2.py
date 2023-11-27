@@ -179,7 +179,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
         cumsum_df['average'] = round(cumsum_df.iloc[:, :-1].mean(axis=1), 2)
         
         df['average'] = round(df.iloc[:, :-1].mean(axis=1), 2)
-        fig = px.line(df, title=f'Weekly Export Inspections: {i.capitalize()}')
+        fig = px.line(df, title=f'Weekly Export Inspections: {i.upper()}')
         fig.update_layout(xaxis_title="Week of Crop Marketing Year",
                           yaxis_title="Exports (metric tons)",
                           legend_title="Crop Mkt Year")
@@ -190,7 +190,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
         fig['data'][-1]['line']['color'] = 'rgb(128, 128, 128)'
         
         trimmed_cumsum = cumsum_df.iloc[:-1, :].copy()
-        sumfig = px.line(trimmed_cumsum, title=f'Cumulative Export Inspections: {i.capitalize()}')
+        sumfig = px.line(trimmed_cumsum, title=f'Cumulative Export Inspections: {i.upper()}')
         sumfig.update_layout(xaxis_title="Week of Crop Marketing Year",
                              yaxis_title="Cumulative Exports (metric tons)",
                              legend_title='Crop Mkt Year')
