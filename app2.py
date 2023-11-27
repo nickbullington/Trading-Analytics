@@ -125,6 +125,6 @@ def build_inspection_dct(clean_data):
 
 annual_inspections_dct = build_inspection_dct(clean_df)
 
-for i, j in annual_inspections.items():
+for i, j in annual_inspections_dct.items():
     st.title(i)
     st.write(j)
