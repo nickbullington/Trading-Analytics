@@ -35,7 +35,10 @@ clean_df = clean_data(raw_df)
 
 converted_data = clean_df.to_csv().encode('utf-8')
 date = clean_df['report_date'].dt.date.sort_values().iloc[0]
-st.download_button(f'Raw Historical Export Inspections Data Since {date}', data=converted_data, file_name='wasde_df.csv', mime='text/csv')
+st.download_button(f'Raw Historical Export Inspections Data Since {date}',
+                   data=converted_data,
+                   file_name='wasde_df.csv',
+                   mime='text/csv')
 
 
 def string_format(value):
@@ -147,7 +150,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
                    font_size=13,
                    align='center',
                    height=20))])
-    dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=1800, width=1000)
+    dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=2000, width=700)
     
     fig_dct['dest_sum_table'] = dest_fig
     
