@@ -205,5 +205,5 @@ est_exports_dct = {'SOYBEANS': 45800000,
 fig_dct = build_charts(annual_inspections_dct, est_exports_dct, dest_sum_df)
 
 for i, j in fig_dct.items():
-    st.title(i)
+    #st.title(i)
     st.write(j)
