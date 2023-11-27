@@ -27,7 +27,7 @@ def clean_data(data):
     df = df[['report_date', 'grain', 'class', 'destination', 'metric ton']].reset_index(drop=True)
     df['grain'] = [i + '-' + j if i == 'WHEAT' else i for i, j in zip(df['grain'], df['class'])]
     df = df[df['grain'].isin(['CORN', 'SORGHUM', 'SOYBEANS',
-                              'WHEAT-HRS', 'WHEAT-HRW', 'WHEAT-SRW', 'WHEAT-SWW'])].copy() #'WHEAT-HDWH'
+                              'WHEAT-HRS', 'WHEAT-HRW', 'WHEAT-SRW', 'WHEAT-SWW', 'WHEAT-DUWH'])].copy() #
     
     return df
     
@@ -137,7 +137,7 @@ def build_inspection_dct(clean_data):
         dff = pd.DataFrame.from_dict(in_dct, orient='index').T
         dct[i] = dff
     
-    dct['WHEAT-ALL'] = dct['WHEAT-HRW'] + dct['WHEAT-HRS'] + dct['WHEAT-SRW'] + dct['WHEAT-SWW'] #+ dct['WHEAT-HDWH']
+    dct['WHEAT-ALL'] = dct['WHEAT-HRW'] + dct['WHEAT-HRS'] + dct['WHEAT-SRW'] + dct['WHEAT-SWW'] + dct['WHEAT-DUWH']
 
     return dct
 
@@ -204,8 +204,8 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
                            marker=dict(color='black', size=10),
                            name='projected final exports')
         
-        fig_dct[f'weekly_{i.upper()}'] = fig
-        fig_dct[f'cumulative_{i.upper()}'] = sumfig
+        fig_dct[f'aweekly_{i.upper()}'] = fig
+        fig_dct[f'bcumulative_{i.upper()}'] = sumfig
     return fig_dct
 
 est_exports_dct = {'SOYBEANS': 45800000,
@@ -233,7 +233,7 @@ def add_alpha(old_file):
         file = f'e{old_file}'
     if 'WHEAT-SWW' in old_file:
         file = f'f{old_file}'
-    if 'WHEAT-HDWH' in old_file:
+    if 'WHEAT-DUWH' in old_file:
         file = f'g{old_file}'
     if 'CORN' in old_file:
         file = f'h{old_file}'
