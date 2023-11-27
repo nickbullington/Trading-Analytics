@@ -36,9 +36,10 @@ clean_df = clean_data(raw_df)
 
 
 converted_data = clean_df.to_csv().encode('utf-8')
-start_date = clean_df['report_date'].dt.date.sort_values().iloc[0]
-end_date = clean_df['report_date'].dt.date.sort_values().iloc[-1]
-second_to_last = clean_df['report_date'].dt.date.sort_values().iloc[-2]
+dates = clean_df['report_date'].unique().dt.date.sort_values()
+start_date = dates.iloc[0]
+end_date = dates.iloc[-1]
+second_to_last = dates.iloc[-2]
 st.download_button(f'Raw Historical Export Inspections Data From {start_date} to {end_date}',
                    data=converted_data,
                    file_name='wasde_df.csv',
