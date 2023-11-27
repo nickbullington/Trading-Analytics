@@ -150,7 +150,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
                    font_size=13,
                    align='center',
                    height=20))])
-    dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=len(dest_sum_df) * 35, width=700)
+    dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=len(dest_sum_df) * 30, width=700)
     
     fig_dct['dest_sum_table'] = dest_fig
     
@@ -207,7 +207,7 @@ est_exports_dct = {'SOYBEANS': 45800000,
                    'WHEAT-HDWH': 2000000}
 
 fig_dct = build_charts(annual_inspections_dct, est_exports_dct, dest_sum_df)
-
+st.subtitle('Charts')
 for i, j in fig_dct.items():
     #st.title(i)
     st.write(j)
