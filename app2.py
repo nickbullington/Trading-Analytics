@@ -41,10 +41,10 @@ dates = clean_df['report_date'].dt.date.unique()#.sort()
 start_date = dates[0]
 end_date = dates[-1]
 second_to_last = dates[-2]
-st.download_button(f'Raw Historical Export Inspections Data From {start_date} to {end_date}',
-                   data=converted_data,
-                   file_name='wasde_df.csv',
-                   mime='text/csv')
+# st.download_button(f'Raw Historical Export Inspections Data From {start_date} to {end_date}',
+#                    data=converted_data,
+#                    file_name='wasde_df.csv',
+#                    mime='text/csv')
 
 
 def string_format(value):
