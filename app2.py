@@ -19,9 +19,10 @@ string = 'https://fgisonline.ams.usda.gov/ExportGrainReport'
 year_lst = ['2019', '2020', '2021', '2022', '2023']
 raw_df = pull_inspection_data(string, year_lst)
 
-data = data_pull(string)
-converted_data = data.to_csv().encode('utf-8')
+
+converted_data = raw_df.to_csv().encode('utf-8')
 st.download_button('Historical WASDE Corn Data', data=converted_data, file_name='wasde_df.csv', mime='text/csv')
+
 #st.plotly_chart(px.line(data))
 #st.title('Ending Stocks')
 
