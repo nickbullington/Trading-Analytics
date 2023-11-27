@@ -1,16 +1,18 @@
-
 import streamlit as st
 import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-# from github import Github
-# # Authentication is defined via github.Auth
-# from github import Auth
+from github import Github
 
-# auth = Auth.Token('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')
-# g = Github(auth=auth)
-# repo = g.get_user().get_repo('Trading-Analytics')
+# Authentication is defined via github.Auth
+from github import Auth
+
+auth = Auth.Token('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')
+
+# Public Web Github
+g = Github(auth=auth)
+repo = g.get_user().get_repo('Trading-Analytics')
 
 st.title('United States Weekly Export Inspections')
 
@@ -45,8 +47,6 @@ clean_df = clean_data(raw_df)
 
 
 converted_data = clean_df.to_csv(index=False).encode('utf-8')
-repo.create_file(f'export_inspections_{start_date}_{end_date}.csv', "last week snapshot", converted_data)
-
 dates = clean_df['report_date'].dt.date.unique()
 start_date = dates[0]
 end_date = dates[-1]
@@ -83,9 +83,6 @@ def build_last_week_destination_table(clean_data):
     out_df.loc['GRAND TOTAL'] = out_df.sum(numeric_only=True)
     out_df = out_df.fillna(0)
     
-    #out_df.to_csv(r'C:\Users\nb153794\OneDrive - The Andersons, Inc\Desktop\Work Projects' \
-    #              fr'\Weekly Grain Inspections\Historical Weekly Destination Snapshots\grain_{last_week}.csv')
-    
     out_df = out_df.map(string_format).reset_index()
     
     return out_df, last_week
@@ -112,11 +109,10 @@ def weekly_sum_snapshot(clean_data):
     
     save_date = out_df.index[-1].strftime('%Y-%m-%d')
     
-    #out_df.to_csv(r'\week_ending_{save_date}.csv')
-    
     return out_df
 
 historical_snapshot_df = weekly_sum_snapshot(clean_df)
+
 
 def crop_year(grain, date):
     if 'WHEAT' in grain:
