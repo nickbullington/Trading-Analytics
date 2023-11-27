@@ -43,7 +43,7 @@ end_date = dates[-1]
 second_to_last = dates[-2]
 st.download_button(f'Raw Historical Export Inspections Data From {start_date} to {end_date}',
                    data=converted_data,
-                   file_name=f'export_inspections{start_date}_{end_date}.csv',
+                   file_name=f'export_inspections_{start_date}_{end_date}.csv',
                    mime='text/csv')
 
 
