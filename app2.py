@@ -207,7 +207,7 @@ est_exports_dct = {'SOYBEANS': 45800000,
                    'WHEAT-HDWH': 2000000}
 
 fig_dct = build_charts(annual_inspections_dct, est_exports_dct, dest_sum_df)
-st.subtitle('Charts')
+st.header('Charts')
 for i, j in fig_dct.items():
     #st.title(i)
     st.write(j)
