@@ -80,6 +80,12 @@ def build_last_week_destination_table(clean_data):
 
 dest_sum_df, last_week_string = build_last_week_destination_table(clean_df)
 
+converted_dest_sum_df = dest_sum_df.to_csv().encode('utf-8')
+st.download_button(f'Weekly Summary by Destination From {second_to_last} to {end_date}',
+                   data=converted_dest_sum_df,
+                   file_name='converted_dest_sum_df.csv',
+                   mime='text/csv')
+
 def weekly_sum_snapshot(clean_data):
     df = clean_data.copy()
     
