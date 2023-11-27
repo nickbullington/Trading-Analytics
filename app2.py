@@ -125,6 +125,84 @@ def build_inspection_dct(clean_data):
 
 annual_inspections_dct = build_inspection_dct(clean_df)
 
-for i, j in annual_inspections_dct.items():
+def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
+    # use inspections by week dct to build regular and cumulative charts.
+    # output: dict where keys are commodity and values are tuples of figures
+    
+    fig_dct = {}
+    
+    dest_fig = go.Figure(data=[go.Table(
+        columnwidth = [700, 350, 450, 450, 500, 300, 300, 300, 300],
+        header=dict(values=list(dest_sum_df.columns),
+                    line_color='darkslategray',
+                    fill_color='lightgrey',
+                    align='center',
+                    font_size=10,
+                    height=17),
+        cells=dict(values=dest_sum_df.T,
+                   line_color='darkslategray',
+                   fill_color='white',
+                   font_size=8,
+                   align='center',
+                   height=18))])
+    dest_fig.update_layout(title='Export Inspections Summary (metric tons)')
+    
+    fig_dct['dest_sum_table'] = dest_fig
+    
+    for i in inspections_dct.keys():
+        df = inspections_dct[i]
+        
+        if i == 'SOYBEANS':
+            df = df.loc[:, 2021:].copy()
+        
+        commodity_export_projection = estimated_exports_dct[i]
+        
+        cumsum_df = round(df.cumsum(), 2)
+        cumsum_df['average'] = round(cumsum_df.iloc[:, :-1].mean(axis=1), 2)
+        
+        df['average'] = round(df.iloc[:, :-1].mean(axis=1), 2)
+        fig = px.line(df, title=f'Weekly Export Inspections: {i.capitalize()}')
+        fig.update_layout(xaxis_title="Week of Crop Marketing Year",
+                          yaxis_title="Exports (metric tons)",
+                          legend_title="Crop Mkt Year")
+        fig['data'][-2]['line']['color'] = 'rgb(0, 0, 0)' #set color to black
+        fig['data'][-2]['line']['width'] = 5
+        fig['data'][-1]['line']['dash'] = 'dot'
+        fig['data'][-1]['line']['width'] = 4
+        fig['data'][-1]['line']['color'] = 'rgb(128, 128, 128)'
+        
+        trimmed_cumsum = cumsum_df.iloc[:-1, :].copy()
+        sumfig = px.line(trimmed_cumsum, title=f'Cumulative Export Inspections: {i.capitalize()}')
+        sumfig.update_layout(xaxis_title="Week of Crop Marketing Year",
+                             yaxis_title="Cumulative Exports (metric tons)",
+                             legend_title='Crop Mkt Year')
+        sumfig['data'][-2]['line']['color'] = 'rgb(0, 0, 0)' #set color of current year data to red
+        sumfig['data'][-2]['line']['width'] = 5 #set weight of current year data line
+        sumfig['data'][-1]['line']['dash'] = 'dot'
+        sumfig['data'][-1]['line']['width'] = 4
+        sumfig['data'][-1]['line']['color'] = 'rgb(128, 128, 128)'
+        sumfig.add_scatter(x=[51],
+                           y=[commodity_export_projection],
+                           marker=dict(color='black', size=10),
+                           name='projected final exports')
+        
+        #fig_dct[i] = fig, sumfig
+        fig_dct[f'weekly_{i}'] = fig
+        fig_dct[f'cumulative_{i}'] = sumfig
+    return fig_dct
+
+est_exports_dct = {'SOYBEANS': 45800000,
+                   'CORN': 55000000,
+                   'SORGHUM': 5000000,
+                   'WHEAT-HRS': 5500000,
+                   'WHEAT-HRW': 500000,
+                   'WHEAT-SRW': 2000000,
+                   'WHEAT-SWW': 3500000,
+                   'WHEAT-ALL': 22000000,
+                   'WHEAT-HDWH': 2000000}
+
+fig_dct = build_charts(annual_inspections_dct, est_exports_dct, dest_sum_df)
+
+for i, j in fig_dct.items():
     st.title(i)
-    st.write(px.line(j))
+    st.write(j)
