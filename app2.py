@@ -7,7 +7,7 @@ import plotly.graph_objects as go
 
 st.title('United States Weekly Export Inspections')
 
-#st.text('revisions from previous week will go here')
+st.text('Download Data')
 
 @st.cache_data(ttl=20*60)
 def pull_inspection_data(string, year_lst):
