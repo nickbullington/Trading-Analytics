@@ -165,7 +165,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
                    height=20))])
     dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=len(dest_sum_df) * 31, width=650)
     
-    fig_dct['dest_sum_table'] = dest_sum_df #dest_fig
+    fig_dct['dest_sum_table'] = dest_fig
     
     for i in inspections_dct.keys():
         df = inspections_dct[i]
