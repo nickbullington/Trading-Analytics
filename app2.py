@@ -237,9 +237,9 @@ def add_alpha(old_file):
         file = f'g{old_file}'
     if 'CORN' in old_file:
         file = f'h{old_file}'
-    if 'SOYBEANS' in old_file:
-        file = f'i{old_file}'
     if 'SORGHUM' in old_file:
+        file = f'i{old_file}'
+    if 'SOYBEANS' in old_file:
         file = f'j{old_file}' 
     return file
 
