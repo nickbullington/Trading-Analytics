@@ -36,8 +36,9 @@ clean_df = clean_data(raw_df)
 
 
 converted_data = clean_df.to_csv().encode('utf-8')
-date = clean_df['report_date'].dt.date.sort_values().iloc[0]
-st.download_button(f'Raw Historical Export Inspections Data Since {date}',
+start_date = clean_df['report_date'].dt.date.sort_values().iloc[0]
+end_date = clean_df['report_date'].dt.date.sort_values().iloc[-1]
+st.download_button(f'Raw Historical Export Inspections Data {start_date} to {end_date}',
                    data=converted_data,
                    file_name='wasde_df.csv',
                    mime='text/csv')
@@ -72,7 +73,7 @@ def build_last_week_destination_table(clean_data):
     #out_df.to_csv(r'C:\Users\nb153794\OneDrive - The Andersons, Inc\Desktop\Work Projects' \
     #              fr'\Weekly Grain Inspections\Historical Weekly Destination Snapshots\grain_{last_week}.csv')
     
-    out_df = out_df.applymap(string_format).reset_index()
+    out_df = out_df.map(string_format).reset_index()
     
     return out_df, last_week
 
@@ -152,7 +153,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
                    font_size=13,
                    align='center',
                    height=20))])
-    dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=len(dest_sum_df) * 31, width=700)
+    dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=len(dest_sum_df) * 31, width=730)
     
     fig_dct['dest_sum_table'] = dest_fig
     
