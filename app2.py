@@ -35,7 +35,7 @@ clean_df = clean_data(raw_df)
 
 converted_data = clean_df.to_csv().encode('utf-8')
 date = clean_df['report_date'].sort_values().iloc[0]
-st.download_button(f'Raw Historical Export Inspections Since {date}', data=converted_data, file_name='wasde_df.csv', mime='text/csv')
+st.download_button(f'Raw Historical Export Inspections Since {date.dt.day}', data=converted_data, file_name='wasde_df.csv', mime='text/csv')
 
 
 def string_format(value):
