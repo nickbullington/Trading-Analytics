@@ -9,7 +9,7 @@ st.title('United States Weekly Export Inspections')
 
 st.text('revisions from previous week will go here')
 
-#@st.cache_data(ttl=20*60)
+@st.cache_data(ttl=20*60)
 def pull_inspection_data(string, year_lst):
     df_lst = []
     for i in year_lst:
