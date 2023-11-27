@@ -37,7 +37,7 @@ raw_df = pull_inspection_data(string, year_lst)
 clean_df = clean_data(raw_df)
 
 
-converted_data = clean_df.to_csv().encode('utf-8')
+converted_data = clean_df.to_csv(index=False).encode('utf-8')
 dates = clean_df['report_date'].dt.date.unique()
 start_date = dates[0]
 end_date = dates[-1]
@@ -83,7 +83,7 @@ def build_last_week_destination_table(clean_data):
 
 dest_sum_df, last_week_string = build_last_week_destination_table(clean_df)
 
-converted_dest_sum_df = dest_sum_df.to_csv().encode('utf-8')
+converted_dest_sum_df = dest_sum_df.to_csv(index=False).encode('utf-8')
 st.download_button(f'Weekly Summary by Destination From {second_to_last} to {end_date}',
                    data=converted_dest_sum_df,
                    file_name='converted_dest_sum_df.csv',
