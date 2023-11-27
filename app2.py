@@ -22,6 +22,7 @@ def clean_data(data):
     df = data.copy()
     df.columns = [i.lower() for i in df.columns.astype(str)]
     df['report_date'] = pd.to_datetime(df['thursday'], format='%Y%m%d')
+    df = df.sort_values(by='report_date')
     df = df[['report_date', 'grain', 'class', 'destination', 'metric ton']].reset_index(drop=True)
     df['grain'] = [i + '-' + j if i == 'WHEAT' else i for i, j in zip(df['grain'], df['class'])]
     df = df[df['grain'].isin(['CORN', 'SORGHUM', 'SOYBEANS',
@@ -36,7 +37,7 @@ clean_df = clean_data(raw_df)
 
 
 converted_data = clean_df.to_csv().encode('utf-8')
-dates = clean_df['report_date'].dt.date.unique().sort()
+dates = clean_df['report_date'].dt.date.unique()#.sort()
 start_date = dates.iloc[0]
 end_date = dates.iloc[-1]
 second_to_last = dates.iloc[-2]
