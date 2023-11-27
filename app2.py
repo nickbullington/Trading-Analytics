@@ -27,7 +27,7 @@ def clean_data(data):
     df = df[['report_date', 'grain', 'class', 'destination', 'metric ton']].reset_index(drop=True)
     df['grain'] = [i + '-' + j if i == 'WHEAT' else i for i, j in zip(df['grain'], df['class'])]
     df = df[df['grain'].isin(['CORN', 'SORGHUM', 'SOYBEANS',
-                              'WHEAT-HRS', 'WHEAT-HRW', 'WHEAT-SRW', 'WHEAT-SWW', 'WHEAT-DUWH'])].copy() #
+                              'WHEAT-HRS', 'WHEAT-HRW', 'WHEAT-SRW', 'WHEAT-SWW'])].copy() #'WHEAT-DUWH'
     
     return df
     
@@ -137,7 +137,7 @@ def build_inspection_dct(clean_data):
         dff = pd.DataFrame.from_dict(in_dct, orient='index').T
         dct[i] = dff
     
-    dct['WHEAT-ALL'] = dct['WHEAT-HRW'] + dct['WHEAT-HRS'] + dct['WHEAT-SRW'] + dct['WHEAT-SWW'] + dct['WHEAT-DUWH']
+    dct['WHEAT-ALL'] = dct['WHEAT-HRW'] + dct['WHEAT-HRS'] + dct['WHEAT-SRW'] + dct['WHEAT-SWW'] #+ dct['WHEAT-DUWH']
 
     return dct
 
@@ -215,8 +215,8 @@ est_exports_dct = {'SOYBEANS': 45800000,
                    'WHEAT-HRW': 500000,
                    'WHEAT-SRW': 2000000,
                    'WHEAT-SWW': 3500000,
-                   'WHEAT-ALL': 22000000,
-                   'WHEAT-DUWH': 2000000}
+                   'WHEAT-ALL': 22000000}
+                   #'WHEAT-DUWH': 2000000}
 
 fig_dct = build_charts(annual_inspections_dct, est_exports_dct, dest_sum_df)
 
