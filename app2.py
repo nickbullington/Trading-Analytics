@@ -143,7 +143,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
         cells=dict(values=dest_sum_df.T,
                    line_color='darkslategray',
                    fill_color='white',
-                   font_size=8,
+                   font_size=10,
                    align='center',
                    height=18))])
     dest_fig.update_layout(title='Export Inspections Summary (metric tons)')
