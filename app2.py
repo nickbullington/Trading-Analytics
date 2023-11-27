@@ -208,15 +208,14 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
         fig_dct[f'bcumulative_{i.upper()}'] = sumfig
     return fig_dct
 
-est_exports_dct = {'SOYBEANS': 45800000,
-                   'CORN': 55000000,
-                   'SORGHUM': 5000000,
-                   'WHEAT-HRS': 5500000,
-                   'WHEAT-HRW': 500000,
-                   'WHEAT-SRW': 2000000,
-                   'WHEAT-SWW': 3500000,
-                   'WHEAT-ALL': 22000000}
-                   #'WHEAT-DUWH': 2000000}
+est_exports_dct = {'SOYBEANS': 1685000000 / 36.73,
+             'CORN': 1800000000 / 39.35,
+             'SORGHUM': 215000000 / 39.35,
+             'WHEAT-HRS': 206000000 / 36.73,
+             'WHEAT-HRW': 133000000 / 36.73,
+             'WHEAT-SRW': 147000000 / 36.73,
+             'WHEAT-SWW': 134000000 / 36.73,
+             'WHEAT-ALL': 686000000 / 36.73} #'WHEAT-DUWH': 2000000}
 
 fig_dct = build_charts(annual_inspections_dct, est_exports_dct, dest_sum_df)
 
