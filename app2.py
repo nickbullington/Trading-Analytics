@@ -39,7 +39,7 @@ converted_data = clean_df.to_csv().encode('utf-8')
 start_date = clean_df['report_date'].dt.date.sort_values().iloc[0]
 end_date = clean_df['report_date'].dt.date.sort_values().iloc[-1]
 second_to_last = clean_df['report_date'].dt.date.sort_values().iloc[-2]
-st.download_button(f'Raw Historical Export Inspections Data {start_date} to {end_date}',
+st.download_button(f'Raw Historical Export Inspections Data From {start_date} to {end_date}',
                    data=converted_data,
                    file_name='wasde_df.csv',
                    mime='text/csv')
@@ -79,10 +79,6 @@ def build_last_week_destination_table(clean_data):
     return out_df, last_week
 
 dest_sum_df, last_week_string = build_last_week_destination_table(clean_df)
-st.download_button(f'Weekly Summary by Destination From {second_to_last} to {end_date}',
-                   data=converted_data,
-                   file_name='wasde_df.csv',
-                   mime='text/csv')
 
 def weekly_sum_snapshot(clean_data):
     df = clean_data.copy()
