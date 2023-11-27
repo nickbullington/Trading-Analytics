@@ -153,7 +153,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
                    font_size=13,
                    align='center',
                    height=20))])
-    dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=len(dest_sum_df) * 31, width=750)
+    dest_fig.update_layout(title='Export Inspections Summary (metric tons)', height=len(dest_sum_df) * 31, width=650)
     
     fig_dct['dest_sum_table'] = dest_fig
     
