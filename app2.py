@@ -36,7 +36,7 @@ clean_df = clean_data(raw_df)
 
 
 converted_data = clean_df.to_csv().encode('utf-8')
-dates = clean_df['report_date'].dt.date.unique().sort_values()
+dates = clean_df['report_date'].dt.date.unique().sort()
 start_date = dates.iloc[0]
 end_date = dates.iloc[-1]
 second_to_last = dates.iloc[-2]
