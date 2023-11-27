@@ -4,7 +4,7 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.title('WASDE Corn Analysis')
+st.title('Weekly Export Inspections')
 
 @st.cache_data
 def pull_inspection_data(string, year_lst):
