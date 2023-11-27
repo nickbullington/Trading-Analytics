@@ -204,8 +204,8 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
                            marker=dict(color='black', size=10),
                            name='projected final exports')
         
-        fig_dct[f'weekly_{i}'] = fig
-        fig_dct[f'cumulative_{i}'] = sumfig
+        fig_dct[f'weekly_{i.upper()}'] = fig
+        fig_dct[f'cumulative_{i.upper()}'] = sumfig
     return fig_dct
 
 est_exports_dct = {'SOYBEANS': 45800000,
