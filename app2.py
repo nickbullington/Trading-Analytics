@@ -6,6 +6,8 @@ import plotly.graph_objects as go
 
 st.title('Weekly Export Inspections')
 
+st.text('add revisions from previous week here')
+
 @st.cache_data(ttl=20*60)
 def pull_inspection_data(string, year_lst):
     df_lst = []
