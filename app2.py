@@ -4,9 +4,9 @@ import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
 
-st.title('Weekly Export Inspections')
+st.title('United States Weekly Export Inspections')
 
-st.text('add revisions from previous week here')
+st.text('revisions from previous week will go here')
 
 @st.cache_data(ttl=20*60)
 def pull_inspection_data(string, year_lst):
