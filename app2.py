@@ -146,7 +146,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
                     fill_color='lightgrey',
                     align='center',
                     font_size=10,
-                    height=17),
+                    height=20),
         cells=dict(values=dest_sum_df.T,
                    line_color='darkslategray',
                    fill_color='white',
