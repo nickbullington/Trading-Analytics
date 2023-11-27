@@ -216,7 +216,7 @@ est_exports_dct = {'SOYBEANS': 45800000,
                    'WHEAT-SRW': 2000000,
                    'WHEAT-SWW': 3500000,
                    'WHEAT-ALL': 22000000,
-                   'WHEAT-HDWH': 2000000}
+                   'WHEAT-DUWH': 2000000}
 
 fig_dct = build_charts(annual_inspections_dct, est_exports_dct, dest_sum_df)
 
