@@ -140,7 +140,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
     fig_dct = {}
     
     dest_fig = go.Figure(data=[go.Table(
-        columnwidth = [710, 350, 450, 450, 500, 300, 300, 300, 300],
+        columnwidth = [710, 300, 400, 400, 500, 300, 300, 300, 300],
         header=dict(values=list(dest_sum_df.columns),
                     line_color='darkslategray',
                     fill_color='lightgrey',
