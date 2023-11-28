@@ -3,16 +3,16 @@ import pandas as pd
 import numpy as np
 import plotly.express as px
 import plotly.graph_objects as go
-# from github import Github
+from github import Github
 
-# # Authentication is defined via github.Auth
-# from github import Auth
+# Authentication is defined via github.Auth
+from github import Auth
 
-# auth = Auth.Token('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')
+auth = Auth.Token('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')
 
-# # Public Web Github
-# g = Github(auth=auth)
-# repo = g.get_user().get_repo('Trading-Analytics')
+# Public Web Github
+g = Github(auth=auth)
+repo = g.get_user().get_repo('Trading-Analytics')
 
 st.title('United States Weekly Export Inspections')
 
