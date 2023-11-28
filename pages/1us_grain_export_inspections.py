@@ -14,9 +14,12 @@ import plotly.graph_objects as go
 # g = Github(auth=auth)
 # repo = g.get_user().get_repo('Trading-Analytics')
 
-st.title('United States Weekly Export Inspections')
-
-st.text('Download Data')
+st.title('United States Weekly Grain Export Inspections')
+st.write('---')
+st.subheader("This page is typically updated automatically on Monday mornings by 11:15 am central time.")
+st.write('---')
+st.header('Download Data')
+#st.write('---')
 
 @st.cache_data(ttl=20*60)
 def pull_inspection_data(string, year_lst):
@@ -94,6 +97,7 @@ st.download_button(f'Summary by Destination From {second_to_last} to {end_date}'
                    data=converted_dest_sum_df,
                    file_name='converted_dest_sum_df.csv',
                    mime='text/csv')
+st.write('---')
 
 def weekly_sum_snapshot(clean_data):
     df = clean_data.copy()
