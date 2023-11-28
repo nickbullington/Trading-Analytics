@@ -21,7 +21,7 @@ st.write('---')
 st.header('Download Data')
 #st.write('---')
 
-@st.cache_data(ttl=20*60)
+@st.cache_data(ttl=60*60)
 def pull_inspection_data(string, year_lst):
     df_lst = []
     for i in year_lst:
