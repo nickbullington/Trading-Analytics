@@ -1,10 +1,27 @@
 Ideas for future tabs
 
-Build price prediction. Find which variables impact price the most by time of year. Build model to predict those x variables. How does price change as fundamental factors change?
+Build price prediction. Find which variables impact price the most by time of year. Build model to predict those x variables. How does price change
+as fundamental factors change?
 
 Anomaly Finder: find and display relationships that are far from normal. Correct for trends, seasonlity, fundamental factors.
 Fertilizer price/vol prediction tool
 Model Builder: You give it a y variable to predict (time series) and it gives back top N predictive variables and prediction.
 Overall price predictions based on fundamental models.
-Cash commodity prices at elevator level displayed on map. Build it so someone can easily see cash spreads and basis level changes over time. 5 days, 20 days, 60 days, 120, etc.
+Cash commodity prices at elevator level displayed on map. Build it so someone can easily see cash spreads and basis level changes over time. 5 days,
+20 days, 60 days, 120, etc.
 Tool to pick two commodities and delivery months. Get annual history of that specific spread (e.g SX / CZ).  Also be able to pick 4 spreads and look at the scatter of one spread against another. 
+
+
+
+World Supply and Demand Model:
+For top 20 importing countries build a delivered price from top exporters. Matrix becomes delivered prices as columns and each country as a row. Sort to find
+top n priced exporters. Track countries place in price lineup against exports between those two countries. What is best structure for target variable?
+Spread from next best ranked price? e.g Dlvd Morocco, french origin = 6.7/bu. Dlvd Morocco, Arg origin = 7.1. To predict one countries exports:
+Think of it as a standard time series prediction problem. Adjust for trend, adjust for seasonality. Build x matrix to predict next months exports.
+X = relative price in dlvd price matrix to historical top 15 importing countries, fundamental factors of exporting country pulled from WASDE to give idea
+of how much a country has to export, historical exports to the top 15 importers, month tags (one hot encoding). 
+y = next month exports? eventual change in final wasde?
+
+Build to update every day with a new cash commodity price. Feed assumed export number into the balance sheet. Feed that new balance sheet into the price model.
+
+Need historical cash fob prices plus freight.
