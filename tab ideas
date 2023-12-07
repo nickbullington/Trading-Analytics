@@ -23,5 +23,6 @@ of how much a country has to export, historical exports to the top 15 importers,
 y = next month exports? eventual change in final wasde?
 
 Build to update every day with a new cash commodity price. Feed assumed export number into the balance sheet. Feed that new balance sheet into the price model.
+Report '2nd order predicted price.' What happens as you continue to move price and make subsequent changes?
 
 Need historical cash fob prices plus freight.
