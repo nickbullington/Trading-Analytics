@@ -11,6 +11,10 @@ Cash commodity prices at elevator level displayed on map. Build it so someone ca
 20 days, 60 days, 120, etc.
 Tool to pick two commodities and delivery months. Get annual history of that specific spread (e.g SX / CZ).  Also be able to pick 4 spreads and look at the scatter of one spread against another. 
 
+Export Dashboard:
+1. CNF prices to major importers from all major exporters. For each importer - stats on recent imports (gtt) including volumes and recent origins, 
+average price spread of the month 
+
 
 
 World Supply and Demand Model:
