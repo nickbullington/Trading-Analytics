@@ -211,7 +211,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
         sumfig.add_scatter(x=[51],
                            y=[commodity_export_projection],
                            marker=dict(color='black', size=10),
-                           name='projected final exports')
+                           name='forecast')
         
         fig_dct[f'aweekly_{i.upper()}'] = fig
         fig_dct[f'bcumulative_{i.upper()}'] = sumfig
