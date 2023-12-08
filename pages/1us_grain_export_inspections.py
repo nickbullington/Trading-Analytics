@@ -141,7 +141,7 @@ def build_inspection_dct(clean_data):
         for j in grain_df['crop_year'].unique()[1:]:
             year_df = grain_df[grain_df['crop_year'] == j].copy()
             summed = year_df.groupby('report_date')['metric ton'].sum()
-            in_dct[f'{j-1}/{str(j)[-2:]}'] = summed.values
+            in_dct[f'{j-1}'] = summed.values
             
         dff = pd.DataFrame.from_dict(in_dct, orient='index').T
         dct[i] = dff
