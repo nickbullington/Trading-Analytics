@@ -141,7 +141,7 @@ def build_inspection_dct(clean_data):
         for j in grain_df['crop_year'].unique()[1:]:
             year_df = grain_df[grain_df['crop_year'] == j].copy()
             summed = year_df.groupby('report_date')['metric ton'].sum()
-            in_dct[f'{j-1}'] = summed.values
+            in_dct[f'{j-1}/{str(j)[-2:]}'] = summed.values
             
         dff = pd.DataFrame.from_dict(in_dct, orient='index').T
         dct[i] = dff
@@ -180,7 +180,7 @@ def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
         df = inspections_dct[i]
         
         if i == 'SOYBEANS':
-            df = df.loc[:, 2021:].copy()
+            df = df.loc[:, '2020/21':].copy()
         
         commodity_export_projection = estimated_exports_dct[i]
         
