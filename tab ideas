@@ -30,3 +30,7 @@ Build to update every day with a new cash commodity price. Feed assumed export n
 Report '2nd order predicted price.' What happens as you continue to move price and make subsequent changes?
 
 Need historical cash fob prices plus freight.
+
+Correlation Tracker:
+Build dash to show serial correlation present in all prices we track. Try to understand when trends are most likely running out of steam.
+Show correlations between different assets... find strongest correlations in last n periods... trade it as a spread? How to monetize? 
