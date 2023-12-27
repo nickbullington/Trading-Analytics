@@ -3,7 +3,10 @@ Ideas for future tabs
 Build price prediction. Find which variables impact price the most by time of year. Build model to predict those x variables. How does price change
 as fundamental factors change?
 
-Anomaly Finder: find and display relationships that are far from normal. Correct for trends, seasonlity, fundamental factors.
+Anomaly Finder: find and display relationships that are far from normal. Correct for trends, seasonality, fundamental factors. Build model that looks at
+   linear combo of various commodities and how that linear combo basket compares to another asset. e.g 50% corn, 50% wheat relationship to rice. nat gas and 
+   crude oil combo compared to dalian polypropylene.
+
 Fertilizer price/vol prediction tool
 Model Builder: You give it a y variable to predict (time series) and it gives back top N predictive variables and prediction.
 Overall price predictions based on fundamental models.
@@ -12,10 +15,9 @@ Cash commodity prices at elevator level displayed on map. Build it so someone ca
 Tool to pick two commodities and delivery months. Get annual history of that specific spread (e.g SX / CZ).  Also be able to pick 4 spreads and look at the scatter of one spread against another. 
 
 Export Dashboard:
-1. CNF prices to major importers from all major exporters. For each importer - stats on recent imports (gtt) including volumes and recent origins, 
-average price spread of the month 
-
-
+1. CNF prices to major importers from all major exporters. Be able to easily see which origin is cheapest to each destination.
+For each importer - stats on recent imports (gtt) including volumes and recent origins, average price spread of the month. Gain understanding of
+how much they potentially have left to buy for the balance of the year.
 
 World Supply and Demand Model:
 For top 20 importing countries build a delivered price from top exporters. Matrix becomes delivered prices as columns and each country as a row. Sort to find
