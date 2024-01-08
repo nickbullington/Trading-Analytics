@@ -44,7 +44,7 @@ def clean_data(data):
     return df
     
 string = 'https://fgisonline.ams.usda.gov/ExportGrainReport'
-year_lst = ['2019', '2020', '2021', '2022', '2023']
+year_lst = ['2019', '2020', '2021', '2022', '2023', '2024']
 raw_df = pull_inspection_data(string, year_lst)
 clean_df = clean_data(raw_df)
 
