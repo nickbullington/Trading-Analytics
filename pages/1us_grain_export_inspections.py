@@ -28,7 +28,7 @@ def clean_data(data):
     df = df.sort_values(by='report_date')
     df = df[['report_date', 'grain', 'class', 'destination', 'metric ton']].reset_index(drop=True)
     df['grain'] = [i + '-' + j if i == 'WHEAT' else i for i, j in zip(df['grain'], df['class'])]
-    df = df[df['grain'].isin(['CORN', 'SORGHUM', 'SOYBEANS',
+    df = df[df['grain'].isin(['CORN', 'SORGHUM', 'SOYBEANS', 'WHEAT-DUWH',
                               'WHEAT-HRS', 'WHEAT-HRW', 'WHEAT-SRW', 'WHEAT-SWW'])].copy() #'WHEAT-DUWH'
     
     return df
