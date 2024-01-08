@@ -182,7 +182,7 @@ def build_agg_time_series(data):
     out_dct['WHEAT-ALL'] = out_dct['WHEAT-ALL'].replace(0, np.nan)
     return out_dct
 
-out_df_dct = build_agg_time_series(current_clean_df)
+out_df_dct = build_agg_time_series(clean_df)
 
 def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
     # use inspections by week dct to build regular and cumulative charts.
