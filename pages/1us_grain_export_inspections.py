@@ -28,7 +28,7 @@ def clean_data(data):
     df = df.sort_values(by='report_date')
     df = df[['report_date', 'grain', 'class', 'destination', 'metric ton']].reset_index(drop=True)
     df['grain'] = [i + '-' + j if i == 'WHEAT' else i for i, j in zip(df['grain'], df['class'])]
-    df = df[df['grain'].isin(['CORN', 'SORGHUM', 'SOYBEANS', 'WHEAT-DUWH',
+    df = df[df['grain'].isin(['CORN', 'SORGHUM', 'SOYBEANS',
                               'WHEAT-HRS', 'WHEAT-HRW', 'WHEAT-SRW', 'WHEAT-SWW'])].copy() #'WHEAT-DUWH'
     
     return df
@@ -120,69 +120,69 @@ def crop_year(grain, date):
         else:
             return date.year + 1
 
-# def build_inspection_dct(clean_data):
-#     df = clean_data.copy()
-#     df['crop_year'] = df.apply(lambda x: crop_year(x['grain'], x['report_date']), axis=1)
-
-#     dct = {}
-#     for i in df['grain'].unique():
-#         grain_df = df[df['grain'] == i].copy()
-#         in_dct = {}
-#         for j in grain_df['crop_year'].unique()[1:]:
-#             year_df = grain_df[grain_df['crop_year'] == j].copy()
-#             summed = year_df.groupby('report_date')['metric ton'].sum()
-#             in_dct[f'{j-1}/{str(j)[-2:]}'] = summed.values
-            
-#         dff = pd.DataFrame.from_dict(in_dct, orient='index').T
-#         dct[i] = dff
-    
-#     dct['WHEAT-ALL'] = dct['WHEAT-HRW'] + dct['WHEAT-HRS'] + dct['WHEAT-SRW'] + dct['WHEAT-SWW'] #+ dct['WHEAT-DUWH']
-
-#     return dct
-
-# annual_inspections_dct = build_inspection_dct(clean_df)
-
-def build_master_idx_dct(data):
-    dct = {}
-    for i in data['crop_year'].unique():
-        year_df = data[data['crop_year'] == i]
-        unique_grains = year_df['grain'].unique()
-        wheat_grains = [i for i in unique_grains if 'WHEAT' in i]
-        other_grains = [i for i in unique_grains if 'WHEAT' not in i]
-        wheat_df_idx = pd.to_datetime(year_df[year_df['grain'].isin(wheat_grains)]['report_date'].unique())
-        other_df_idx = year_df[year_df['grain'].isin(other_grains)]['report_date'].unique()
-        dct[i] = {'wheat': wheat_df_idx, 'other': other_df_idx}
-    return dct  
-
-def build_agg_time_series(data):
-    df = data.copy()
+def build_inspection_dct(clean_data):
+    df = clean_data.copy()
     df['crop_year'] = df.apply(lambda x: crop_year(x['grain'], x['report_date']), axis=1)
-    dct = build_master_idx_dct(df)
-    out_dct = {}
-    for j in df['grain'].unique():
-        if 'WHEAT' in j:
-            comm = 'wheat'
-        else:
-            comm = 'other'
-        grain_df = df[df['grain'] == j].copy()
+
+    dct = {}
+    for i in df['grain'].unique():
+        grain_df = df[df['grain'] == i].copy()
         in_dct = {}
-        for i in grain_df['crop_year'].unique()[1:]:
-            year_df = grain_df[grain_df['crop_year'] == i]
-            idx = dct[i][comm]
-            summed = year_df.groupby('report_date')['metric_ton'].sum()
-            in_dct[f'{i-1}/{str(i)[-2:]}'] = np.ravel(pd.DataFrame(summed).reindex(idx).values)
+        for j in grain_df['crop_year'].unique()[1:]:
+            year_df = grain_df[grain_df['crop_year'] == j].copy()
+            summed = year_df.groupby('report_date')['metric ton'].sum()
+            in_dct[f'{j-1}/{str(j)[-2:]}'] = summed.values
             
         dff = pd.DataFrame.from_dict(in_dct, orient='index').T
-        out_dct[j] = dff.iloc[:-1, -5:]
+        dct[i] = dff
     
-    copy_dct = dict(out_dct)
-    out_dct['WHEAT-ALL'] = (copy_dct['WHEAT-HRW'].fillna(0) + copy_dct['WHEAT-HRS'].fillna(0) +
-                            copy_dct['WHEAT-SRW'].fillna(0) + copy_dct['WHEAT-SWW'].fillna(0) +
-                            copy_dct['WHEAT-DUWH'].fillna(0))
-    out_dct['WHEAT-ALL'] = out_dct['WHEAT-ALL'].replace(0, np.nan)
-    return out_dct
+    dct['WHEAT-ALL'] = dct['WHEAT-HRW'] + dct['WHEAT-HRS'] + dct['WHEAT-SRW'] + dct['WHEAT-SWW'] #+ dct['WHEAT-DUWH']
 
-out_df_dct = build_agg_time_series(clean_df)
+    return dct
+
+annual_inspections_dct = build_inspection_dct(clean_df)
+
+# def build_master_idx_dct(data):
+#     dct = {}
+#     for i in data['crop_year'].unique():
+#         year_df = data[data['crop_year'] == i]
+#         unique_grains = year_df['grain'].unique()
+#         wheat_grains = [i for i in unique_grains if 'WHEAT' in i]
+#         other_grains = [i for i in unique_grains if 'WHEAT' not in i]
+#         wheat_df_idx = pd.to_datetime(year_df[year_df['grain'].isin(wheat_grains)]['report_date'].unique())
+#         other_df_idx = year_df[year_df['grain'].isin(other_grains)]['report_date'].unique()
+#         dct[i] = {'wheat': wheat_df_idx, 'other': other_df_idx}
+#     return dct  
+
+# def build_agg_time_series(data):
+#     df = data.copy()
+#     df['crop_year'] = df.apply(lambda x: crop_year(x['grain'], x['report_date']), axis=1)
+#     dct = build_master_idx_dct(df)
+#     out_dct = {}
+#     for j in df['grain'].unique():
+#         if 'WHEAT' in j:
+#             comm = 'wheat'
+#         else:
+#             comm = 'other'
+#         grain_df = df[df['grain'] == j].copy()
+#         in_dct = {}
+#         for i in grain_df['crop_year'].unique()[1:]:
+#             year_df = grain_df[grain_df['crop_year'] == i]
+#             idx = dct[i][comm]
+#             summed = year_df.groupby('report_date')['metric_ton'].sum()
+#             in_dct[f'{i-1}/{str(i)[-2:]}'] = np.ravel(pd.DataFrame(summed).reindex(idx).values)
+            
+#         dff = pd.DataFrame.from_dict(in_dct, orient='index').T
+#         out_dct[j] = dff.iloc[:-1, -5:]
+    
+#     copy_dct = dict(out_dct)
+#     out_dct['WHEAT-ALL'] = (copy_dct['WHEAT-HRW'].fillna(0) + copy_dct['WHEAT-HRS'].fillna(0) +
+#                             copy_dct['WHEAT-SRW'].fillna(0) + copy_dct['WHEAT-SWW'].fillna(0) +
+#                             copy_dct['WHEAT-DUWH'].fillna(0))
+#     out_dct['WHEAT-ALL'] = out_dct['WHEAT-ALL'].replace(0, np.nan)
+#     return out_dct
+
+# out_df_dct = build_agg_time_series(clean_df)
 
 def build_charts(inspections_dct, estimated_exports_dct, dest_sum_df):
     # use inspections by week dct to build regular and cumulative charts.
@@ -258,7 +258,7 @@ est_exports_dct = {'SOYBEANS': 1691000000 / 36.73,
              'WHEAT-SWW': 144000000 / 36.73,
              'WHEAT-ALL': 691000000 / 36.73} #'WHEAT-DUWH': 2000000}
 
-fig_dct = build_charts(out_df_dct, est_exports_dct, dest_sum_df)
+fig_dct = build_charts(annual_inspections_dct, est_exports_dct, dest_sum_df)
 
 def add_alpha(old_file):
     if 'dest' in old_file:
